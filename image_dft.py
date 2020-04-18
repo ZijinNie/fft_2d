@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
+
 
 def signal(sinuses):
     ''' This function creates a function f(x) = sin(a*pi*2)+sin(b*p*2)+...
@@ -227,3 +229,16 @@ def padding_zeros(img):
         for j in range(N):
           result[(L-M)//2 + i][(R - N)//2 + j] = img[i][j]
       return result
+
+def compress(image,imageName, percentile=0.25):
+  percentile = 1- percentile
+  # filtering
+  copy = image
+  row, col = image.shape
+
+  for r in range(row):
+    for c in range(col):
+      if (r+c) > percentile*(row+col):
+        copy[r, c] = 0
+
+  return copy 
