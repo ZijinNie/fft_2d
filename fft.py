@@ -188,8 +188,9 @@ def doCompression(dataPath):
 
     
 def showPlot():
-    img = mpimg.imread('plot.png')
-    imgplot = plt.imshow(img,plt.cm.gray)
+    img = mpimg.imread('runtime.png')
+    imgplot = plt.imshow(img)
+    plt.show()
     return 0
 
 if __name__=="__main__":

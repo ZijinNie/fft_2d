@@ -207,6 +207,10 @@ def denoise(img, percentile = 0.25):
         else:
           if  j < N * (0.5 - percentile /2 ) or j > N * (0.5 + percentile /2) :
             transformed[i][j] = 0
+    num = M * (1-percentile) * N * (1-percentile)
+    print("-------------------------------")
+    print('The number of non zero is {}'.format(num))
+    print('Non-zero fraction is {}'.format(1-percentile))
     return transformed
 
 def padding_zeros(img):
@@ -234,11 +238,20 @@ def compress(image,imageName, percentile=0.25):
   percentile = 1- percentile
   # filtering
   copy = image
-  row, col = image.shape
+  M, N = image.shape
 
-  for r in range(row):
-    for c in range(col):
-      if (r+c) > percentile*(row+col):
-        copy[r, c] = 0
+  for i in range(M):
+    for j in range(N):
+      if i < M * (0.5 - percentile /2 ) or i > M * (0.5 + percentile /2) :
+        copy[i][j] = 0
+      else:
+        if  j < N * (0.5 - percentile /2 ) or j > N * (0.5 + percentile /2) :
+          copy[i][j] = 0 
 
+        
+  num = M * percentile * N * percentile
+  print("-------------------------------")
+  print('For {}% compression'.format((1-percentile)*100))
+  print('The number of non zero is {}'.format(num))
+  print('Non-zero fraction is {}'.format(percentile))
   return copy 
