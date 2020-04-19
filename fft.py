@@ -1,8 +1,9 @@
 import sys
 import getopt 
-import cv2
+#import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 from matplotlib import image
 from image_dft import *
 import csv
@@ -187,9 +188,12 @@ def doCompression(dataPath):
 
     
 def showPlot():
+    img = mpimg.imread('plot.png')
+    imgplot = plt.imshow(img,plt.cm.gray)
     return 0
 
 if __name__=="__main__":
+   
     main(sys.argv[1:])
 
 
